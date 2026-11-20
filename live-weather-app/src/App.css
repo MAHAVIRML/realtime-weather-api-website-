@@ -1,0 +1,243 @@
+/* ===== Modern Typography ===== */
+body {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* ===== Dynamic Weather Backgrounds ===== */
+.home {
+  min-height: 100vh;
+  padding: 40px 20px;
+  transition: background 0.6s ease, color 0.4s ease;
+  background: linear-gradient(135deg, #4e73df 0%, #6f42c1 100%);
+}
+
+.home.clear {
+  background: linear-gradient(135deg, #2b86c5 0%, #56ccf2 50%, #f2994a 100%);
+}
+
+.home.clouds {
+  background: linear-gradient(135deg, #606c88 0%, #3f4c6b 100%);
+}
+
+.home.rain,
+.home.drizzle {
+  background: linear-gradient(135deg, #1f3b4d 0%, #2c5364 50%, #0f2027 100%);
+}
+
+.home.thunderstorm {
+  background: linear-gradient(135deg, #141e30 0%, #243b55 100%);
+}
+
+.home.snow {
+  background: linear-gradient(135deg, #83a4d4 0%, #b6fbff 100%);
+}
+
+.home.mist,
+.home.haze,
+.home.fog {
+  background: linear-gradient(135deg, #757f9a 0%, #d7dde8 100%);
+}
+
+/* Dark Mode Override */
+.home.dark-mode {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #090d16 100%) !important;
+  color: #f8fafc;
+}
+
+/* ===== Floating Header Icon & Button Hover ===== */
+.header-icon,
+.welcome-icon {
+  display: inline-block;
+  animation: float 3.5s ease-in-out infinite;
+}
+
+.theme-toggle {
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.3s ease;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.05);
+}
+
+/* ===== Horizontal Glassmorphism 5-Day Forecast ===== */
+.forecast-section {
+  width: 100%;
+  max-width: 720px;
+  margin: 32px auto 0;
+  animation: fadeUp 0.6s ease forwards;
+}
+
+.forecast-section h3 {
+  color: #ffffff;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+  text-align: left;
+  letter-spacing: 0.3px;
+}
+
+.forecast-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+}
+
+.forecast-card {
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 18px;
+  padding: 16px 10px;
+  text-align: center;
+  color: #ffffff;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+}
+
+.forecast-card:hover {
+  transform: translateY(-6px);
+  background: rgba(255, 255, 255, 0.28);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2);
+}
+
+.forecast-card p {
+  margin: 0 0 6px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+}
+
+.forecast-card img {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto;
+  display: block;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.15));
+}
+
+.forecast-card strong {
+  display: block;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.forecast-card span {
+  display: block;
+  margin-left: 0 !important;
+  margin-top: 4px;
+  font-size: 0.78rem;
+  opacity: 0.9;
+}
+
+/* Dark Mode Forecast Cards */
+.home.dark-mode .forecast-card {
+  background: rgba(30, 41, 59, 0.65);
+  border-color: rgba(148, 163, 184, 0.2);
+}
+
+.home.dark-mode .forecast-card:hover {
+  background: rgba(51, 65, 85, 0.8);
+}
+
+/* ===== Keyframe Animations ===== */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== Mobile Responsive Forecast ===== */
+@media (max-width: 700px) {
+  .forecast-grid {
+    grid-template-columns: repeat(auto-fit, minmax(115px, 1fr));
+  }
+}
+
+
+.weather-card {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background: #fff;
+  border-radius: 30px;
+}
+
+/* Floating glass layer */
+.cloud-effect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 27%;
+
+  background: rgba(255, 255, 255, 0.78);
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  border-radius: 0 0 45px 45px;
+
+  box-shadow:
+    0 12px 25px rgba(50, 60, 80, 0.10),
+    inset 0 -1px 5px rgba(255,255,255,0.7);
+
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Soft cloud glow */
+.temperature-section {
+  position: relative;
+  z-index: 0;
+}
+
+.temperature-section::before {
+  content: "";
+  position: absolute;
+  width: 65%;
+  height: 120px;
+  top: -20px;
+  left: 18%;
+
+  background: radial-gradient(
+    ellipse,
+    rgba(180, 200, 225, 0.25),
+    transparent 70%
+  );
+
+  filter: blur(25px);
+  animation: cloudShade 7s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes cloudShade {
+  from {
+    transform: translateX(-15px);
+    opacity: 0.4;
+  }
+
+  to {
+    transform: translateX(20px);
+    opacity: 0.9;
+  }
+}
