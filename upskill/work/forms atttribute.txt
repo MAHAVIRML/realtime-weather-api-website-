@@ -1,0 +1,15 @@
+<!DOCTYPE html.
+<html>
+<head>
+     <title>Form attribute</title>
+</head>
+   <body>
+          <h1> login page </h1>
+         <pre>username:
+              password:
+              login:
+          </pre>
+</body>
+</html>
+              
+          
