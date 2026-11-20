@@ -12,9 +12,11 @@ function Home() {
   const weatherType =
     weather?.weather?.[0]?.main?.toLowerCase() || "";
 
-  // Calculate real Min & Max from the next 24 hours of forecast data
   let updatedWeather = weather;
-  const forecastList = Array.isArray(forecast) ? forecast : forecast?.list;
+
+  const forecastList = Array.isArray(forecast)
+    ? forecast
+    : forecast?.list;
 
   if (weather && forecastList?.length > 0) {
     const next24Hours = forecastList.slice(0, 8);
@@ -33,12 +35,9 @@ function Home() {
   return (
     <div className={`home ${weatherType} ${darkMode ? "dark-mode" : ""}`}>
       <div className="container">
-        {/* Header */}
         <div className="header">
           <span className="header-icon">☁️</span>
-
           <h1>Live Weather</h1>
-
           <p>
             Get real-time weather information anywhere in the world
           </p>
@@ -51,35 +50,28 @@ function Home() {
           </button>
         </div>
 
-        {/* Search */}
         <SearchBar
           setWeather={setWeather}
           setForecast={setForecast}
         />
 
-        {/* Divider */}
         <div className="or-divider">
           <span>OR</span>
         </div>
 
-        {/* Current Location */}
         <LocationButton
           setWeather={setWeather}
+          setForecast={setForecast}
         />
 
-        {/* Current Weather */}
         <WeatherCard weather={updatedWeather} />
 
-        {/* 5-Day Forecast */}
         <ForecastCard forecast={forecast} />
 
-        {/* Welcome Message */}
         {!weather && (
           <div className="welcome-card">
             <div className="welcome-icon">🌍</div>
-
             <h2>Check the Weather</h2>
-
             <p>
               Search for any city or use your current location to see
               real-time weather information.

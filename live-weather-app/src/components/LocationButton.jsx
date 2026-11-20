@@ -1,7 +1,10 @@
 import { useState } from "react";
-import { getWeatherByLocation } from "../services/weatherApi";
+import {
+  getWeatherByLocation,
+  getForecastByLocation
+} from "../services/weatherApi";
 
-function LocationButton({ setWeather }) {
+function LocationButton({ setWeather, setForecast }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -19,10 +22,15 @@ function LocationButton({ setWeather }) {
         const { latitude, longitude } = position.coords;
 
         try {
-          const data = await getWeatherByLocation(latitude, longitude);
-          setWeather(data);
-        } catch (error) {
-          setError("Unable to fetch weather for your location.");
+          const [weatherData, forecastData] = await Promise.all([
+            getWeatherByLocation(latitude, longitude),
+            getForecastByLocation(latitude, longitude)
+          ]);
+
+          setWeather(weatherData);
+          setForecast(forecastData);
+        } catch (err) {
+          setError(err.message || "Unable to fetch location weather.");
         } finally {
           setLoading(false);
         }
@@ -30,6 +38,11 @@ function LocationButton({ setWeather }) {
       () => {
         setError("Please allow location access to use this feature.");
         setLoading(false);
+      },
+      {
+        enableHighAccuracy: true,
+        timeout: 10000,
+        maximumAge: 0
       }
     );
   };
